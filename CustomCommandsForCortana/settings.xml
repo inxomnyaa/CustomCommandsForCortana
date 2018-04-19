@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<settings>
+  <string name="appname" description="The app name is the prefix for commands, so Cortana knows which App is meant. Example: 'Hey Cortana! Command lights off.'. The default value is 'Command'" value="Befehl"/>
+</settings>

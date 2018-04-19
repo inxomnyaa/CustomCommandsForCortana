@@ -1,0 +1,28 @@
+﻿<ContentDialog
+    x:Class="CustomCommandsForCortana.Dialogs.EditSettingDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CustomCommandsForCortana.Dialogs"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Title="Edit setting"
+    PrimaryButtonText="Edit"
+    SecondaryButtonText="Cancel"
+    PrimaryButtonClick="ContentDialog_PrimaryButtonClick"
+    SecondaryButtonClick="ContentDialog_SecondaryButtonClick">
+
+    <StackPanel Orientation="Vertical">
+        <StackPanel>
+            <TextBlock>Name:</TextBlock>
+            <TextBlock Name="SettingName"></TextBlock>
+        </StackPanel>
+        <StackPanel>
+            <TextBlock>Description:</TextBlock>
+            <TextBlock Name="Description"></TextBlock>
+        </StackPanel>
+        <StackPanel>
+            <TextBox Name="ValueTextBox" Header="Value:" Width="Auto"/>
+        </StackPanel>
+    </StackPanel>
+</ContentDialog>

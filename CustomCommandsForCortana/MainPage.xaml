@@ -1,0 +1,96 @@
+﻿<Page
+    x:Class="CustomCommandsForCortana.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CustomCommandsForCortana"
+    xmlns:Model="using:CustomCommandsForCortana.Model"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <!-- RESOURCES AND STYLES -->
+    <Page.Resources>
+    </Page.Resources>
+
+    <NavigationView x:Name="NavView"
+                    Canvas.ZIndex="0"
+                    Background="DodgerBlue"
+                    Foreground="Black"
+                    Header="Custom commands for Cortana"
+                    AlwaysShowHeader="True" RequestedTheme="Dark" IsSettingsVisible="True" ItemInvoked="NavView_ItemInvoked"
+                    >
+        <!-- HEADER -->
+        <NavigationView.HeaderTemplate>
+            <DataTemplate>
+                <Grid Margin="10 0 0 0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Style="{StaticResource TitleTextBlockStyle}"
+                           FontSize="28"
+                           VerticalAlignment="Center"
+                           Text="Custom commands for Cortana"
+                           Foreground="White"/>
+                    <CommandBar Grid.Column="1"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Top"
+                            DefaultLabelPosition="Right"
+                            Background="Transparent">
+                        <AppBarButton x:Name="MenuButtonAdd" Label="Add" Icon="Add" Click="MenuButtonAdd_Click"/>
+                        <AppBarButton x:Name="MenuButtonEdit" Label="Edit" Icon="Edit" Click="MenuButtonEdit_Click"/>
+                        <AppBarButton x:Name="MenuButtonDelete" Label="Delete" Icon="Delete" Click="MenuButtonDelete_Click"/>
+                        <!--<AppBarButton x:Name="Execute" Label="Execute" Icon="Play" Click="Execute_Click"/>-->
+                        <AppBarButton x:Name="Reload" Label="Reload" Icon="Sync" Click="Reload_Click"/>
+                        <AppBarButton x:Name="Save" Label="Save" Icon="Save" Click="Save_Click"/>
+                    </CommandBar>
+                </Grid>
+            </DataTemplate>
+        </NavigationView.HeaderTemplate>
+        <!-- CONTENT -->
+        <Grid x:Name="main">
+            <Grid.Background>
+                <ImageBrush Stretch="UniformToFill" ImageSource="Assets/cortana_bg.jpg" Opacity="0.5"/>
+            </Grid.Background>
+            <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <ListView x:Name="ListCommands" ItemsSource="{x:Bind ViewModel.Commands}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" KeyUp="ListCommands_KeyUp" IsMultiSelectCheckBoxEnabled="True">
+                    <ListView.HeaderTemplate>
+                        <DataTemplate>
+                            <Grid Padding="12">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*" MinWidth="100"/>
+                                    <ColumnDefinition Width="2*" MinWidth="100"/>
+                                    <ColumnDefinition Width="3*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="Name" Style="{ThemeResource CaptionTextBlockStyle}"/>
+                                <TextBlock Grid.Column="1" Text="Listen for" Style="{ThemeResource CaptionTextBlockStyle}"/>
+                                <TextBlock Grid.Column="2" Text="Batch command" Style="{ThemeResource CaptionTextBlockStyle}"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.HeaderTemplate>
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:Name="TableDataTemplate" x:DataType="Model:CustomCommand">
+                            <Grid Height="Auto" AutomationProperties.Name="{x:Bind Name}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*" MinWidth="100"/>
+                                    <ColumnDefinition Width="2*" MinWidth="100"/>
+                                    <ColumnDefinition Width="3*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="{x:Bind Name}" Style="{ThemeResource BaseTextBlockStyle}" Height="Auto"/>
+                                <TextBlock Grid.Column="1" VerticalAlignment="Center" Text="{x:Bind ListenFor}" Style="{ThemeResource BaseTextBlockStyle}" Height="Auto"/>
+                                <TextBlock Grid.Column="2" VerticalAlignment="Center" Text="{x:Bind BatchCommand}" Height="Auto"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+        </Grid>
+
+    </NavigationView>
+
+</Page>
